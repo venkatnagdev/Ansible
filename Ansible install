@@ -1,0 +1,94 @@
+high is scallable
+open source
+both are configuraction tool
+estelly 
+
+hostname server-l
+sudo -i
+yum update
+yum install epel-release  {packages install}
+yum install git python python-devel python-pip openssl ansible
+ansible --version
+cd /etc/ansible/ansible.cfg
+                enable: invertory
+                             sudo suer
+vi host
+        [local]  {Group Name}
+       158.25.554.22 [client ip  adress]
+-------------------------------------------
+how to check user
+  cd /etc/passwd
+create New user
+cd /etc/ansible
+useradd  ansible
+passwd ansible
+-----------------------------------------------
+*user full permission
+visudo   
+          root           ALL=AlLL           ALL
+         ansible      ALL=ALL       NOPASSWD: ALL
+
+
+*client server
+Add user  :useradd ansible
+passwd ansible
+visudo
+ root           ALL=ALL           ALL
+  ansible      ALL=ALL           NOPASSWD: ALL
+
+su - ansible   (user  swich)
+
+*applicaction server
+
+*generate ssh ket
+  ssh-keygen
+ls -la
+copy one server to another server
+ssh-copy-id  annsible@125.25.555.555
+                      [another server username and id]
+yes
+ansible passwd
+cd /etc/ansible/host  (check)
+ssh-copy-id localhost
+
+*ckeck  ansible success /failure
+ansible  all -m ping
+---------------------------------------------------
+*client server
+cd /opt
+sudo mkdir ansible
+cd /ansible
+touch f1 f2 f3
+
+*applicaction server
+ 
+ansible bach24 -a "ls -l /opt/ansible"
+      bach24  group name is client server
+
+ansible all -m ping
+
+ansible batch24 -a  "touch /opt/ansible/f7" -s (create client server)
+
+ansible bach24 -a "ls -l /opt/ansible"
+(check f7 file)
+
+
+ansible batch24 -a "cat/etc/passwd" -s
+
+vi devops-ansible
+ansible batch24 -m copy -s -a "src=/opt/devops-ansible dest=/opt/ansible" 
+
+ansible batch24 -m mv -s -a "src=/opt/devops-ansible dest=/opt/ansible"
+(one server to another server move file)
+
+*install commands
+ansible batch24 -m yum -s -a "name=git state=present" -s
+
+ansible batch24 -m yum -s -a "name=git state=absent" -s
+
+create client server user 
+ansible batch24 -m user -s -a "name=venkat" -s
+
+Remove user
+ansible batch24 -m user -s -a "name=venkat state=absent" -s
+
