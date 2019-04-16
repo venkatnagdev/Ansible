@@ -1,0 +1,64 @@
+playbook
+--------------
+sudo mkdir ansible
+cd ansible
+sudo vim  sample.yaml
+1)Create git in playbook
+------------------------------
+          - hosts: batch24
+            become: yes   (sudo permission)
+            tasks:
+            - name: installing git package
+            yum: name=git status=latest
+
+Run the playbook
+ansible-playbook sample.yaml
+2)remove git in playbook
+-*----------------------------
+ - hosts: batch24
+            become: yes   (sudo permission)
+            tasks:
+            - name: installing git package
+            yum: name=git status=absent
+
+3)create httpd in playbook
+---------------------------------
+     - host:  batch24
+     become: yes
+     task:
+     -name: install httpd
+     yum: name=httpd
+    -name: starting httpd service
+     service:  name=httpd status=started
+
+
+4)create user
+--------------------
+    -host: batch24
+     become: yes
+     task:
+   -name: create user
+   user: venkat
+  copy: src=/opt/f1.s1 dest=/opt
+
+5)install all commands
+-------------------------------
+        - hosts: batch24
+         become:yes
+        task:
+        -name: install commands
+        yum: status:latest name={{ item }}
+       with_items: 
+           - git
+          -wget
+         -httpd
+         -vim
+-name: starting httpd service
+     service:  name=httpd status=started
+-name:copying files
+   copy: src=/opt/f1.s1 dest=/opt
+
+ansible-doc -1
+ansible-doc  -1 | wc  (modules count)
+
+      
