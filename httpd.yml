@@ -21,3 +21,9 @@
     template:
       src: index.html
       dest: /var/www/html/
+
+
+
+
+
+Runplaybook: ansible-playbook httpd.yml
