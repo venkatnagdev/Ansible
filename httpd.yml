@@ -1,0 +1,23 @@
+---
+- name: sample playbook
+  hosts: localhost
+  tasks:
+  - name: sample file
+    file:
+      path: /opt/sample.txt
+      owner: root
+      group: root
+      mode: 0644
+      state: touch
+  - name: install apache
+    apt:
+      name: httpd
+      state: latest
+  - name: start apache service
+    service:
+      name: httpd
+      state: started
+  - name: copy sample templatefile
+    template:
+      src: index.html
+      dest: /var/www/html/
