@@ -1,0 +1,19 @@
+vi /etc/ansible/hosts
+[web-servers]
+175.2.56.51
+command:ansible all -m ping
+output:172.2.56.51 | SUCCESS => {
+   "changed" : false,
+   "ping" : "pong"
+   }
+  
+--- 
+- hosts: web-servers
+  become: true
+  tasks:
+    - name: copy war onto tomcat servers
+	  copy:
+	    src: /opt/playbook/webapp/target/**.war
+		               or
+	    src: /vat/lib/jenkins/webapp/target/**.war
+		dest: /opt/apache-tomcat-8.5.32/webapps/target/**.war
