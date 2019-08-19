@@ -9,14 +9,17 @@ output:172.2.56.51 | SUCCESS => {
   
  create httpd in playbook
 ---------------------------------
-     - host:  batch24
-     become: yes
-     task:
-     -name: install httpd
-     yum: name=httpd
-    -name: starting httpd service
-     service:  name=httpd status=started
- 
+ ---
+- hosts: all
+  become: yes
+  tasks:
+    - name: ensure httpd is at the latest version
+      apt: name=httpd state=latest
+    - name: start httpd
+      service:
+          name: httpd
+          state: started
+	  
 --- 
 - hosts: web-servers
   become: true
